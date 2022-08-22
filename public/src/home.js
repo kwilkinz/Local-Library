@@ -67,17 +67,20 @@ Steps: Popularity is represented by the number of times a book has been borrowed
 */
 function getMostPopularBooks(books) {
   // Step 1: Organize book data
-  let borrows = books.map((book) => ({
-    name: book.title,
-    count: book.borrows.length,
-  }));
-  // sort by borrow count, less than
-  borrows.sort((numA, numB) => (numA.count < numB.count ? 1 : -1));
+  let borrows = helperMostPopularBooks(books);  
   // return borrows, with top 5
   return borrows.slice(0, 5);
 }
   
-
+function helperMostPopularBooks(books) {
+  let calc = books.map((book) => ({
+    name: book.title,
+    count: book.borrows.length,
+  }));
+  // sort by borrow count, less than
+  calc.sort((numA, numB) => (numA.count < numB.count ? 1 : -1));
+  return calc
+} 
 
 
 /* Used: .forEach() & Template Literals & .sort()
@@ -93,15 +96,18 @@ Steps bluprint: 2 paramets which are you wanting to look through? Are
   this book?... After we need something to hold the overall author & book..
 */
 function getMostPopularAuthors(books, authors) {
+  let callFunctionBook = helperMostPopularAuthors (books,authors);
+  return callFunctionBook
+}
+
+
+function helperMostPopularAuthors (books, authors) {
   let finalResult = [];
-  // loop through specifically authors... then
   authors.forEach((author) => {
     let getAuthor = {
-      // list them out. Want to print them. -- { name: 'Tate Fletcher', count: 0 } 
       name: `${author.name.first} ${author.name.last}`,
       count: 0,
     }; 
-    // Specifically looking for something in book
     books.forEach((book) => {
       if (book.authorId === author.id) {
         getAuthor.count += book.borrows.length;
@@ -112,8 +118,6 @@ function getMostPopularAuthors(books, authors) {
   return finalResult.sort((numA, numB) => numB.count - numA.count).slice(0, 5);
 }
 
-
-
 module.exports = {
   getTotalBooksCount,
   getTotalAccountsCount,
@@ -121,4 +125,6 @@ module.exports = {
   getMostCommonGenres,
   getMostPopularBooks,
   getMostPopularAuthors,
+  helperMostPopularAuthors,
+  helperMostPopularBooks,
 };

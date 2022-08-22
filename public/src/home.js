@@ -96,27 +96,24 @@ Steps bluprint: 2 paramets which are you wanting to look through? Are
   this book?... After we need something to hold the overall author & book..
 */
 function getMostPopularAuthors(books, authors) {
-  let callFunctionBook = helperMostPopularAuthors (books,authors);
-  return callFunctionBook
+function getAuthorById(authors, authorId) {
+  return authors.find((author) => authorId === author.id);
+}
+ let bookAuthor = [];
+ books.forEach((book) => { 
+   const match = bookAuthor.find((author) => author.id === book.authorId) 
+     if (match) {
+       match.count += book.borrows.length; 
+     } else {
+       const writer = getAuthorById(authors, book.authorId);
+       const count = book.borrows.length;
+       console.log(writer)
+       bookAuthor.push({ name: `${writer.name.first} ${writer.name.last}`, count, }); 
+     } 
+ });
+  return bookAuthor.sort((numA, numB) => numB.count - numA.count).slice(0, 5);
 }
 
-
-function helperMostPopularAuthors (books, authors) {
-  let finalResult = [];
-  authors.forEach((author) => {
-    let getAuthor = {
-      name: `${author.name.first} ${author.name.last}`,
-      count: 0,
-    }; 
-    books.forEach((book) => {
-      if (book.authorId === author.id) {
-        getAuthor.count += book.borrows.length;
-      }
-    });
-    finalResult.push(getAuthor);
-  });
-  return finalResult.sort((numA, numB) => numB.count - numA.count).slice(0, 5);
-}
 
 module.exports = {
   getTotalBooksCount,
@@ -125,6 +122,5 @@ module.exports = {
   getMostCommonGenres,
   getMostPopularBooks,
   getMostPopularAuthors,
-  helperMostPopularAuthors,
   helperMostPopularBooks,
 };

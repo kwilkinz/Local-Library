@@ -1,6 +1,6 @@
 # projectLocalLibrary
 
-Accounts.js - Functions that are in use: 
+##Accounts.js - Functions that are in use: 
  A. findAccountById(accounts, id)
   1. .Reduce() 
   2. .find() 
@@ -18,7 +18,7 @@ Accounts.js - Functions that are in use:
   3. .push() 
   
   
-Books.js -- Function that are in use: 
+##Books.js -- Function that are in use: 
   A. findAuthorById(authors, id): 
     1. .find() 
     
@@ -37,7 +37,7 @@ Books.js -- Function that are in use:
     3. .slice()
     
   
-  Home.js -- Function that are in use: 
+  ##Home.js -- Function that are in use: 
     A. getTotalBooksCount(books = 0): 
       1. Default Parameters 
       
